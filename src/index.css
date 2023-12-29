@@ -3,10 +3,8 @@
 @tailwind components;
 @tailwind utilities;
 :root {
-  --clr-grey-1: #102a42;
-  --clr-white: #fff;
-  --very-light-blue: rgb(119, 212, 252);
-  --rex-bold-font: "ALK Rex Bold", sans-serif;
+  --text-color: #313e51;
+  --text-color-p: #626c7f;
 }
 *,
 *::before,
@@ -20,8 +18,9 @@
 body {
   font-family: "Rubik", sans-serif;
   line-height: 1.5;
-  line-height: 1.5;
   -webkit-font-smoothing: antialiased;
+  color: var(--text-color);
+  background: rgb(244 246 250 / 1);
 }
 input,
 button,
@@ -54,7 +53,9 @@ h4 {
 h5 {
   font-size: 0.875rem;
 }
-
+p {
+  color: var(--text-color-p);
+}
 @media screen and (min-width: 800px) {
   h1 {
     font-size: 3rem;
@@ -105,6 +106,7 @@ svg {
 }
 
 .section-center {
-  max-width: 1600px;
+  max-width: 1450px;
   margin: 0 auto;
+  padding: 0 1rem;
 }
