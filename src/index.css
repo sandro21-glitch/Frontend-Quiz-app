@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=Rubik:wght@400;500;600;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Rubik:wght@300;400;500;600;700&display=swap");
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -21,6 +21,9 @@ body {
   -webkit-font-smoothing: antialiased;
   color: var(--text-color);
   background: rgb(244 246 250 / 1);
+  position: relative;
+  overflow: hidden;
+  transition: background 0.3s ease;
 }
 input,
 button,
@@ -58,19 +61,19 @@ p {
 }
 @media screen and (min-width: 800px) {
   h1 {
-    font-size: 3rem;
+    font-size: 4rem;
   }
   h2 {
-    font-size: 2.5rem;
+    font-size: 3.5rem;
   }
   h3 {
-    font-size: 2rem;
+    font-size: 3rem;
   }
   h4 {
-    font-size: 1.5rem;
+    font-size: 2.5rem;
   }
   h5 {
-    font-size: 1rem;
+    font-size: 2rem;
   }
   body {
     font-size: 1rem;
@@ -106,7 +109,7 @@ svg {
 }
 
 .section-center {
-  max-width: 1450px;
+  max-width: 1650px;
   margin: 0 auto;
   padding: 0 1rem;
 }
