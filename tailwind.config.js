@@ -12,6 +12,7 @@ export default {
         "text-color-p": "#626C7F",
         "medium-purple": "#A729F5",
         "bg-col": "#ffffff",
+        darkBg: "rgb(59 77 102 / 1)",
         "button-bg": "#ffffff",
         "option-bg": "#F4F6FA",
         "option-color": "#626C7F",
