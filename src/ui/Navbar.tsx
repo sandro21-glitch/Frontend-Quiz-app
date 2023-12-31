@@ -6,10 +6,25 @@ import ThemeSwitcher from "./ThemeSwitcher";
 import { useAppSelector } from "../hooks/reduxHooks";
 const Navbar = () => {
   const darkMode = useAppSelector((store) => store.home.darkMode);
+  const icon = useAppSelector((store) => store.quiz.icon);
+  const title = useAppSelector((store) => store.quiz.title);
   return (
     <header className="section-center pt-0" style={{ paddingTop: "5rem" }}>
       <nav className="flex-between">
-        <img src="" alt="logo" className="invisible" />
+        <div className="flex items-center gap-7">
+          <img
+            src={icon}
+            alt="logo"
+            className={`${icon ? "visible" : "invisible"}`}
+          />
+          <h5
+            className={`${
+              darkMode ? "text-white" : "text-text-color"
+            } font-medium`}
+          >
+            {title}
+          </h5>
+        </div>
         <ul className="flex gap-5">
           <li>
             <img src={darkMode ? sunIconLight : sunIcon} alt="sun" />
