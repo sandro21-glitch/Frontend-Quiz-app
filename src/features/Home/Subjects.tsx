@@ -1,19 +1,23 @@
 import { subjectsList } from "../../constants/subjecList";
-import { useAppSelector } from "../../hooks/reduxHooks";
+import { useAppDispatch, useAppSelector } from "../../hooks/reduxHooks";
+import data from "../../../public/data.json";
+import { setSubjectTheme } from "../Quizzes/quizSlice";
+
 const Subjects = () => {
   const darkMode = useAppSelector((store) => store.home.darkMode);
+  const dispatch = useAppDispatch();
   return (
     <section className="md:flex-1 w-full">
       <ul className="w-full flex flex-col gap-5 items-start">
         {subjectsList.map((sub) => {
           const { id, subject, logo, bgColor } = sub;
-          console.log(bgColor);
           return (
             <li
               key={id}
+              onClick={() => dispatch(setSubjectTheme({ data, subject }))}
               className={`${
                 darkMode ? "bg-darkBg" : "bg-white"
-              } p-5 rounded-[1rem] w-full text-left flex items-center gap-5 cursor-pointer shadow-sm`}
+              } p-5 rounded-[1rem] w-full text-left flex items-center gap-5 cursor-pointer shadow-lg`}
             >
               <img
                 src={logo}
