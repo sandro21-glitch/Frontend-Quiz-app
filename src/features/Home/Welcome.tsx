@@ -2,6 +2,7 @@ import { useAppSelector } from "../../hooks/reduxHooks";
 
 const Welcome = () => {
   const darkMode = useAppSelector((store) => store.home.darkMode);
+
   return (
     <div className="md:flex-1">
       <h1
