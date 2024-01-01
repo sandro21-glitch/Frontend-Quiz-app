@@ -8,15 +8,15 @@ type Question = {
 
 type QuestionTypes = {
   question: string;
-  index: number;
+  quizIndex: number;
   questions: Question;
 };
-const QuizQuestion = ({ question, index, questions }: QuestionTypes) => {
+const QuizQuestion = ({ question, quizIndex, questions }: QuestionTypes) => {
   const darkMode = useAppSelector((store) => store.home.darkMode);
   return (
     <div className="flex-1">
       <p className="text-[1.3rem] mb-5">
-        Question {index + 1} of {questions.length}
+        Question {quizIndex + 1} of {questions.length}
       </p>
       <h4
         className={`leading-[3rem] font-semibold ${
