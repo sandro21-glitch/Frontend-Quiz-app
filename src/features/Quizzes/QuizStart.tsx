@@ -1,28 +1,27 @@
-// import { useState } from "react";
 import { useAppSelector } from "../../hooks/reduxHooks";
 import Quiz from "./Quiz";
 import QuizQuestion from "./QuizQuestion";
 
 const QuizStart = () => {
-  const quizzes = useAppSelector((store) => store.quiz.quizzes);
-  //   const [questionIndex, setQuestionIndex] = useState(0);
+  const { quizzes, index } = useAppSelector((store) => store.quiz);
+
   return (
     <div>
-      {quizzes.map((quiz, index) => {
+      {quizzes.map((quiz, quizIndex) => {
         const { questions } = quiz;
-        const { question, answer, options } = questions[0];
-        console.log(questions);
+        const { question, answer, options } = questions[index];
+        // console.log(questions);
         return (
           <div
             className="flex items-start flex-col md:flex-row gap-20"
-            key={index}
+            key={quizIndex}
           >
             <QuizQuestion
               question={question}
-              index={index}
+              quizIndex={index}
               questions={questions}
             />
-            <Quiz answer={answer} options={options} />
+            <Quiz options={options} />
           </div>
         );
       })}
