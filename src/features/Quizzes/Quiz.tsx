@@ -1,27 +1,85 @@
-import { useAppSelector } from "../../hooks/reduxHooks";
-
+import { useEffect, useState } from "react";
+import { useAppDispatch, useAppSelector } from "../../hooks/reduxHooks";
+import {
+  nextQuiz,
+  setIsChecked,
+  setUserAnswer,
+  updateUserScore,
+} from "./quizSlice";
+import Button from "../../ui/Button";
+import ErrorMsg from "./ErrorMsg";
 type QuizTypes = {
-  answer: string;
   options: string[];
 };
 
-const Quiz = ({ answer, options }: QuizTypes) => {
-  const darkMode = useAppSelector((store) => store.home.darkMode);
-  console.log(answer);
+const Quiz = ({ options }: QuizTypes) => {
   const letters = ["A", "B", "C", "D"];
+  const dispatch = useAppDispatch();
+  const darkMode = useAppSelector((store) => store.home.darkMode);
+  const { answer, userAnswer, isChecked } = useAppSelector(
+    (store) => store.quiz
+  );
+
+  const [activeOption, setActiveOption] = useState("");
+
+  const handleCheckCorrectAnswer = (): void => {
+    if (activeOption === "") {
+      dispatch(setIsChecked(false));
+    } else {
+      dispatch(setUserAnswer(activeOption));
+      dispatch(setIsChecked(true));
+      dispatch(updateUserScore());
+    }
+  };
+
+  const handleNextQuiz = () => {
+    dispatch(nextQuiz());
+  };
+
+  useEffect(() => {
+    setActiveOption("");
+  }, [answer]);
+
+  const isCorrectAnswer = userAnswer === answer;
+  const isWrongAnswer = userAnswer !== answer && userAnswer === activeOption;
   return (
-    <form className="md:flex-1 w-full">
-      <ul className="w-full flex flex-col gap-5 items-start">
+    <section className="md:flex-1 w-full">
+      <article className="w-full flex flex-col gap-5 items-start">
         {options.map((option, index) => {
           return (
-            <li
+            <button
+              type="button"
+              disabled={userAnswer !== ""}
+              onClick={() => setActiveOption(option)}
               key={index}
-              className={`group ${
-                darkMode ? "bg-darkBg" : "bg-white"
-              }  p-5 rounded-[1rem] w-full text-left flex items-center
-           gap-7 cursor-pointer shadow-lg hover:outline hover:outline-medium-purple transition-all ease-linear duration-75`}
+              className={`group ${darkMode ? "bg-darkBg" : "bg-white"} ${
+                activeOption === option && userAnswer !== option
+                  ? " border-medium-purple"
+                  : isCorrectAnswer && option === userAnswer
+                  ? " border-green-bg"
+                  : isWrongAnswer && option === userAnswer
+                  ? " border-red-bg"
+                  : userAnswer
+                  ? "border-transparent cursor-not-allowed"
+                  : " hover:border-medium-purple border-transparent"
+              } p-5 rounded-[1rem] w-full text-left flex items-center
+  gap-7 cursor-pointer border-[3px] shadow-lg outline-[3px]  transition-all ease-linear duration-150`}
+              style={{ cursor: userAnswer !== "" ? "not-allowed" : "pointer" }}
             >
-              <span className="  font-semibold group-hover:text-medium-purple text-[2rem] px-[.79rem] py-[.3rem] rounded-[.5rem] bg-option-bg group-hover:bg-light-purple">
+              <span
+                className={`font-semibold text-[2rem] px-[.79rem] py-[.3rem] rounded-[.5rem]  ${
+                  isCorrectAnswer && option === userAnswer
+                    ? "bg-green-bg text-white"
+                    : isWrongAnswer && option === userAnswer
+                    ? "bg-red-bg text-white"
+                    : isCorrectAnswer ||
+                      (isWrongAnswer && option !== userAnswer)
+                    ? " bg-option-bg group-hover:bg-none"
+                    : activeOption === option && userAnswer !== option
+                    ? "bg-medium-purple text-white"
+                    : "bg-option-bg group-hover:text-medium-purple group-hover:bg-light-purple"
+                } `}
+              >
                 {letters[index]}
               </span>
               <span
@@ -31,11 +89,19 @@ const Quiz = ({ answer, options }: QuizTypes) => {
               >
                 {option}
               </span>
-            </li>
+            </button>
           );
         })}
-      </ul>
-    </form>
+      </article>
+
+      {userAnswer ? (
+        <Button type="Next Question" func={handleNextQuiz} />
+      ) : (
+        <Button type="Submit Answer" func={handleCheckCorrectAnswer} />
+      )}
+
+      {!isChecked ? <ErrorMsg /> : null}
+    </section>
   );
 };
 
