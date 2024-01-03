@@ -19,6 +19,8 @@ export default {
         "option-color": "#626C7F",
         "correct-color": "#26D782",
         "invalid-color": "#EE5454",
+        "green-bg": "rgb(38 215 130 / 1)",
+        "red-bg": "rgb(238 84 84 / 1)"
       },
     },
   },
