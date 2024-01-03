@@ -24,17 +24,33 @@ interface CounterState {
       answer: string;
     }[];
   }[];
+  questions: {
+    question: string;
+    options: string[];
+    answer: string;
+  }[];
   isActiveQuiz: boolean;
   icon: string;
   title: string;
+  index: number;
+  userAnswer: string;
+  answer: string;
+  score: number;
+  isChecked: boolean;
 }
 
 // Define the initial state using that type
 const initialState: CounterState = {
   quizzes: [],
+  questions: [],
   isActiveQuiz: false,
   icon: "",
   title: "",
+  index: 0,
+  userAnswer: "",
+  answer: "",
+  score: 0,
+  isChecked: true,
 };
 
 export const quizSlice = createSlice({
@@ -54,12 +70,40 @@ export const quizSlice = createSlice({
       state.quizzes = newData;
       state.icon = newData[0].icon;
       state.title = newData[0].title;
-      // console.log(newData);
+      state.questions = newData[0].questions;
+      state.answer = state.questions[state.index].answer;
+    },
+    nextQuiz: (state) => {
+      if (state.index < state.questions.length - 1 && state.userAnswer !== "") {
+        state.index += 1;
+        state.answer = state.questions[state.index].answer;
+        setIsChecked(true);
+      } else {
+        setIsChecked(false);
+      }
+
+      state.userAnswer = "";
+    },
+    setUserAnswer: (state, action: PayloadAction<string>) => {
+      state.userAnswer = action.payload;
+    },
+    updateUserScore: (state) => {
+      const { answer, userAnswer } = state;
+      if (answer === userAnswer) state.score++;
+    },
+    setIsChecked: (state, action: PayloadAction<boolean>) => {
+      state.isChecked = action.payload;
     },
   },
 });
 
-export const { setSubjectTheme } = quizSlice.actions;
+export const {
+  setSubjectTheme,
+  nextQuiz,
+  setUserAnswer,
+  updateUserScore,
+  setIsChecked,
+} = quizSlice.actions;
 
 // Other code such as selectors can use the imported `RootState` type
 // export const selectCount = (state: RootState) => state.counter.value;
