@@ -9,7 +9,7 @@ const QuizStart = () => {
     <div>
       {quizzes.map((quiz, quizIndex) => {
         const { questions } = quiz;
-        const { question, answer, options } = questions[index];
+        const { question, options } = questions[index];
         // console.log(questions);
         return (
           <div
