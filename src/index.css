@@ -22,7 +22,7 @@ body {
   color: var(--text-color);
   background: rgb(244 246 250 / 1);
   position: relative;
-  overflow: hidden;
+  /* overflow: hidden; */
   transition: background 0.3s ease;
 }
 input,
