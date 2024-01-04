@@ -3,6 +3,7 @@ import { useAppDispatch, useAppSelector } from "../../hooks/reduxHooks";
 import {
   nextQuiz,
   setIsChecked,
+  setIsCompleted,
   setUserAnswer,
   updateUserScore,
 } from "./quizSlice";
@@ -18,19 +19,23 @@ type QuizTypes = {
 const Quiz = ({ options }: QuizTypes) => {
   const letters = generateLetters(options.length);
   const dispatch = useAppDispatch();
-  const { answer, userAnswer, isChecked, isCompleted } = useAppSelector(
-    (store) => store.quiz
-  );
+  const { answer, userAnswer, isChecked, isCompleted, index, questions } =
+    useAppSelector((store) => store.quiz);
 
   const [activeOption, setActiveOption] = useState("");
 
   const handleCheckCorrectAnswer = (): void => {
     if (activeOption === "") {
       dispatch(setIsChecked(false));
-    } else {
-      dispatch(setUserAnswer(activeOption));
-      dispatch(setIsChecked(true));
-      dispatch(updateUserScore());
+      return;
+    }
+
+    dispatch(setUserAnswer(activeOption));
+    dispatch(setIsChecked(true));
+    dispatch(updateUserScore());
+
+    if (index === questions.length - 1) {
+      dispatch(setIsCompleted());
     }
   };
 
@@ -59,11 +64,11 @@ const Quiz = ({ options }: QuizTypes) => {
         setActiveOption={setActiveOption}
       />
 
-      {userAnswer ? (
+      {userAnswer && !isCompleted ? (
         <Button type="Next Question" func={handleNextQuiz} />
-      ) : (
+      ) : !isCompleted ? (
         <Button type="Submit Answer" func={handleCheckCorrectAnswer} />
-      )}
+      ) : null}
       {isCompleted && <Button type="Submit Quiz" func={submitQuiz} />}
 
       {!isChecked ? <ErrorMsg /> : null}
