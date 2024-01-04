@@ -10,6 +10,7 @@ import { generateLetters } from "./utils/GenerateLetters";
 import Button from "../../ui/Button";
 import ErrorMsg from "./ErrorMsg";
 import SingleQuiz from "./SingleQuiz";
+import { Navigate, useNavigate } from "react-router-dom";
 type QuizTypes = {
   options: string[];
 };
@@ -17,7 +18,7 @@ type QuizTypes = {
 const Quiz = ({ options }: QuizTypes) => {
   const letters = generateLetters(options.length);
   const dispatch = useAppDispatch();
-  const { answer, userAnswer, isChecked } = useAppSelector(
+  const { answer, userAnswer, isChecked, isCompleted } = useAppSelector(
     (store) => store.quiz
   );
 
@@ -35,6 +36,10 @@ const Quiz = ({ options }: QuizTypes) => {
 
   const handleNextQuiz = () => {
     dispatch(nextQuiz());
+  };
+  const navigate = useNavigate();
+  const submitQuiz = () => {
+    navigate("/finished");
   };
 
   useEffect(() => {
@@ -59,6 +64,7 @@ const Quiz = ({ options }: QuizTypes) => {
       ) : (
         <Button type="Submit Answer" func={handleCheckCorrectAnswer} />
       )}
+      {isCompleted && <Button type="Submit Quiz" func={submitQuiz} />}
 
       {!isChecked ? <ErrorMsg /> : null}
     </section>
