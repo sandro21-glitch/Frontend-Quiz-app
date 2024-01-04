@@ -37,6 +37,7 @@ interface CounterState {
   answer: string;
   score: number;
   isChecked: boolean;
+  isCompleted: boolean;
 }
 
 // Define the initial state using that type
@@ -51,6 +52,7 @@ const initialState: CounterState = {
   answer: "",
   score: 0,
   isChecked: true,
+  isCompleted: false,
 };
 
 export const quizSlice = createSlice({
@@ -79,6 +81,7 @@ export const quizSlice = createSlice({
         state.answer = state.questions[state.index].answer;
         setIsChecked(true);
       } else {
+        state.isCompleted = true;
         setIsChecked(false);
       }
 
@@ -94,6 +97,17 @@ export const quizSlice = createSlice({
     setIsChecked: (state, action: PayloadAction<boolean>) => {
       state.isChecked = action.payload;
     },
+    resetQuiz: (state) => {
+      state.isActiveQuiz = false;
+      state.icon = "";
+      state.title = "";
+      state.index = 0;
+      state.userAnswer = "";
+      state.answer = "";
+      state.score = 0;
+      state.isChecked = false;
+      state.isCompleted = false;
+    }
   },
 });
 
@@ -103,6 +117,7 @@ export const {
   setUserAnswer,
   updateUserScore,
   setIsChecked,
+  resetQuiz
 } = quizSlice.actions;
 
 // Other code such as selectors can use the imported `RootState` type
