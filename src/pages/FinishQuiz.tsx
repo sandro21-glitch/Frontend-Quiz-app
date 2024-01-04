@@ -1,9 +1,16 @@
+import { useNavigate } from "react-router-dom";
 import { useAppSelector } from "../hooks/reduxHooks";
+import { useDispatch } from "react-redux";
 import Button from "../ui/Button";
-
+import { resetQuiz } from "../features/Quizzes/quizSlice";
 const FinishQuiz = () => {
   const { icon, title, score } = useAppSelector((store) => store.quiz);
-  const resetQuiz = () => {};
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const resetQuizData = () => {
+    dispatch(resetQuiz());
+    navigate("/");
+  };
   return (
     <section className="section-center " style={{ marginTop: "5rem" }}>
       <article className="flex items-start flex-col md:flex-row">
@@ -26,7 +33,7 @@ const FinishQuiz = () => {
               <p className="mb-0 text-[1.5rem]">out of 10</p>
             </div>
           </div>
-          <Button type="Play Again" func={resetQuiz} />
+          <Button type="Play Again" func={resetQuizData} />
         </div>
       </article>
     </section>
