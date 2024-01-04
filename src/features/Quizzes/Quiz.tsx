@@ -6,6 +6,7 @@ import {
   setUserAnswer,
   updateUserScore,
 } from "./quizSlice";
+import { generateLetters } from "./utils/GenerateLetters";
 import Button from "../../ui/Button";
 import ErrorMsg from "./ErrorMsg";
 type QuizTypes = {
@@ -13,7 +14,7 @@ type QuizTypes = {
 };
 
 const Quiz = ({ options }: QuizTypes) => {
-  const letters = ["A", "B", "C", "D"];
+  const letters = generateLetters(options.length);
   const dispatch = useAppDispatch();
   const darkMode = useAppSelector((store) => store.home.darkMode);
   const { answer, userAnswer, isChecked } = useAppSelector(
