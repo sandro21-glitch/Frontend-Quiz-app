@@ -1,6 +1,7 @@
 import { useAppSelector } from "../../hooks/reduxHooks";
 import SingleQuizLetters from "./SingleQuizLetters";
-
+import correctImage from "/icon-correct.svg";
+import incorrectImage from "/icon-incorrect.svg";
 type SingleQuizTypes = {
   isCorrectAnswer: boolean;
   isWrongAnswer: boolean;
@@ -18,7 +19,7 @@ const SingleQuiz = ({
   activeOption,
 }: SingleQuizTypes) => {
   const darkMode = useAppSelector((store) => store.home.darkMode);
-  const { userAnswer } = useAppSelector((store) => store.quiz);
+  const { userAnswer, answer } = useAppSelector((store) => store.quiz);
   return (
     <article className="w-full flex flex-col gap-5 items-start">
       {options.map((option, index) => {
@@ -38,8 +39,9 @@ const SingleQuiz = ({
                 : userAnswer
                 ? "border-transparent cursor-not-allowed"
                 : " hover:border-medium-purple border-transparent"
-            } p-5 rounded-[1rem] w-full text-left flex items-center
-  gap-7 cursor-pointer border-[3px] shadow-lg outline-[3px]  transition-all ease-linear duration-150`}
+            } p-5 rounded-[1rem] w-full  flex items-center
+              gap-7 cursor-pointer border-[3px] shadow-lg outline-[3px] 
+              transition-all ease-linear duration-150`}
             style={{ cursor: userAnswer !== "" ? "not-allowed" : "pointer" }}
           >
             <SingleQuizLetters
@@ -58,6 +60,30 @@ const SingleQuiz = ({
               }`}
             >
               {option}
+            </span>
+            <span className="ml-auto">
+              {userAnswer && isCorrectAnswer && option === userAnswer ? (
+                <img
+                  src={correctImage}
+                  alt="correct icon"
+                  loading="lazy"
+                  className="block w-10 h-10 ml-auto"
+                />
+              ) : userAnswer && isWrongAnswer && option === userAnswer ? (
+                <img
+                  src={incorrectImage}
+                  alt="incorrect icon"
+                  loading="lazy"
+                  className="block w-10 h-10 ml-auto"
+                />
+              ) : userAnswer && userAnswer !== option && option === answer ? (
+                <img
+                  src={correctImage}
+                  alt="correct icon"
+                  loading="lazy"
+                  className="block w-10 h-10 ml-auto"
+                />
+              ) : null}
             </span>
           </button>
         );
