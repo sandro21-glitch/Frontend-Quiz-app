@@ -81,7 +81,6 @@ export const quizSlice = createSlice({
         state.answer = state.questions[state.index].answer;
         setIsChecked(true);
       } else {
-        state.isCompleted = true;
         setIsChecked(false);
       }
 
@@ -97,6 +96,9 @@ export const quizSlice = createSlice({
     setIsChecked: (state, action: PayloadAction<boolean>) => {
       state.isChecked = action.payload;
     },
+    setIsCompleted: (state) => {
+      state.isCompleted = true;
+    },
     resetQuiz: (state) => {
       state.isActiveQuiz = false;
       state.icon = "";
@@ -105,9 +107,9 @@ export const quizSlice = createSlice({
       state.userAnswer = "";
       state.answer = "";
       state.score = 0;
-      state.isChecked = false;
+      state.isChecked = true;
       state.isCompleted = false;
-    }
+    },
   },
 });
 
@@ -117,7 +119,8 @@ export const {
   setUserAnswer,
   updateUserScore,
   setIsChecked,
-  resetQuiz
+  resetQuiz,
+  setIsCompleted,
 } = quizSlice.actions;
 
 // Other code such as selectors can use the imported `RootState` type
