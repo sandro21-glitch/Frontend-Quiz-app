@@ -10,7 +10,7 @@ import { generateLetters } from "./utils/GenerateLetters";
 import Button from "../../ui/Button";
 import ErrorMsg from "./ErrorMsg";
 import SingleQuiz from "./SingleQuiz";
-import { Navigate, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 type QuizTypes = {
   options: string[];
 };
