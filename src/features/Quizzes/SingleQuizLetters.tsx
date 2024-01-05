@@ -19,7 +19,7 @@ const SingleQuizLetters = ({
 }: LettersProps) => {
   return (
     <span
-      className={`font-semibold text-[2rem] px-[.79rem] py-[.3rem] rounded-[.5rem]  ${
+      className={`font-semibold text-[1rem] md:[1.5rem] lg:text-[2rem] px-[.79rem] py-[.3rem] rounded-[.5rem]  ${
         isCorrectAnswer && option === userAnswer
           ? "bg-green-bg text-white"
           : isWrongAnswer && option === userAnswer
