@@ -6,14 +6,14 @@ const QuizStart = () => {
   const { quizzes, index } = useAppSelector((store) => store.quiz);
 
   return (
-    <div>
+    <section>
       {quizzes.map((quiz, quizIndex) => {
         const { questions } = quiz;
         const { question, options } = questions[index];
         // console.log(questions);
         return (
-          <div
-            className="flex items-start flex-col md:flex-row gap-20"
+          <article
+            className="flex items-start flex-col lg:flex-row gap-20"
             key={quizIndex}
           >
             <QuizQuestion
@@ -22,10 +22,10 @@ const QuizStart = () => {
               questions={questions}
             />
             <Quiz options={options} />
-          </div>
+          </article>
         );
       })}
-    </div>
+    </section>
   );
 };
 
