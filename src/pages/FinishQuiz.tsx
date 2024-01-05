@@ -30,26 +30,26 @@ const FinishQuiz = () => {
               darkMode ? "bg-darkBg" : "bg-white"
             }   rounded-3xl flex justify-center items-center flex-col`}
           >
-            <div className="flex items-center gap-3 md:gap-5 mb-14">
+            <div className="flex items-center gap-3 md:gap-5 mb-5 md:mb-14">
               <img src={icon} alt={`${title} logo`} className="visible" />
-              <h5
+              <h4
                 className={`${
                   darkMode ? "text-white" : "text-text-color"
                 } font-medium`}
               >
                 {title}
-              </h5>
+              </h4>
             </div>
             {/* score */}
-            <div className="flex flex-col items-center leading-[6rem]">
+            <div className="flex flex-col items-center ">
               <p
-                className={`text-[10rem] font-semibold ${
+                className={`text-[5rem] md:text-[8rem] lg:text-[10rem] font-semibold ${
                   darkMode ? "text-white" : "text-text-color"
-                } mb-0`}
+                } `}
               >
                 {score}
               </p>
-              <p className="mb-0 text-[1.5rem]">out of 10</p>
+              <p className="text-[1.5rem]">out of 10</p>
             </div>
           </div>
           <Button type="Play Again" func={resetQuizData} />
