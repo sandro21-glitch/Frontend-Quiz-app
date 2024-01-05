@@ -55,7 +55,7 @@ const SingleQuiz = ({
             />
 
             <span
-              className={`text-[1.8rem] font-medium ${
+              className={`text-[1rem] md:[1.5rem] lg:text-[1.8rem] font-medium ${
                 darkMode ? "text-white" : "text-text-color"
               }`}
             >
