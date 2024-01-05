@@ -26,7 +26,7 @@ const Subjects = () => {
                 className="w-[2.5rem] h-[2.5rem] p-1 rounded-[.3rem]"
               />
               <p
-                className={`font-bold text-[1.5rem] ${
+                className={`font-bold text-[1rem] md:text-[1.5rem] ${
                   darkMode ? "text-white" : "text-text-color"
                 }`}
               >
