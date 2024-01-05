@@ -13,7 +13,7 @@ const FinishQuiz = () => {
     navigate("/");
   };
   return (
-    <section className="section-center " style={{ marginTop: "5rem" }}>
+    <section className="section-center mx-auto mt-[2.5rem] lg:mt-[5rem]">
       <article className="flex items-start flex-col md:flex-row">
         <h1
           className={`w-full mb-5 md:flex-1 ${
