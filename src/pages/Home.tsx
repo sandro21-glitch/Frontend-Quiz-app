@@ -6,7 +6,7 @@ import { useAppSelector } from "../hooks/reduxHooks";
 const Home = () => {
   const isActiveQuiz = useAppSelector((store) => store.quiz.isActiveQuiz);
   return (
-    <section className="section-center " style={{ marginTop: "5rem" }}>
+    <section className="section-center mx-auto mt-[2.5rem] lg:mt-[5rem]">
       {!isActiveQuiz ? (
         <div className="flex items-start flex-col md:flex-row">
           <Welcome />
