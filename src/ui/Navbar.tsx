@@ -9,7 +9,7 @@ const Navbar = () => {
   const icon = useAppSelector((store) => store.quiz.icon);
   const title = useAppSelector((store) => store.quiz.title);
   return (
-    <header className="section-center pt-0" style={{ paddingTop: "5rem" }}>
+    <header className="section-center mx-auto mt-[2rem] lg:mt-[5rem]" >
       <nav className="flex-between">
         <div className="flex items-center gap-7">
           <img
