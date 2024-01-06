@@ -12,7 +12,7 @@ const Navbar = () => {
   return (
     <header className="section-center mx-auto mt-[2rem] lg:mt-[5rem]">
       <nav className="flex-between">
-        <div className="flex items-center gap-7">
+        <div className="flex items-center gap-3 md:gap-7">
           <img
             src={icon}
             alt="logo"
@@ -22,7 +22,7 @@ const Navbar = () => {
           <h5
             className={`${
               darkMode ? "text-white" : "text-text-color"
-            } text-[1.8rem] font-medium`}
+            } text-[1rem] md:text-[1.8rem] font-medium`}
           >
             {title}
           </h5>
