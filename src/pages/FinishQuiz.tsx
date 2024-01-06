@@ -3,6 +3,7 @@ import { useAppSelector } from "../hooks/reduxHooks";
 import { useDispatch } from "react-redux";
 import Button from "../ui/Button";
 import { resetQuiz } from "../features/Quizzes/quizSlice";
+import { findSubjectColor } from "../utils/findSubColor";
 const FinishQuiz = () => {
   const { icon, title, score } = useAppSelector((store) => store.quiz);
   const darkMode = useAppSelector((store) => store.home.darkMode);
@@ -31,7 +32,12 @@ const FinishQuiz = () => {
             }   rounded-3xl flex justify-center items-center flex-col`}
           >
             <div className="flex items-center gap-3 md:gap-5 mb-5 md:mb-14">
-              <img src={icon} alt={`${title} logo`} className="visible" />
+              <img
+                src={icon}
+                alt={`${title} logo`}
+                className="visible w-[2.5rem] h-[2.5rem] p-1"
+                style={{ backgroundColor: findSubjectColor(title) }}
+              />
               <h4
                 className={`${
                   darkMode ? "text-white" : "text-text-color"
